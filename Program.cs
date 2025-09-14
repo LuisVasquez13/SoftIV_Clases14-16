@@ -1,15 +1,12 @@
 ﻿// Programa usando la condicional IF, el menu Switch y el ciclo While
 // Correspondiente a la clase 14, 15 y 16 de C#
 
-System.Random random = new System.Random();
+System.Random random = new System.Random(); // Objeto random para generar numeros aleatorios
 
-int totalJugador = 0;
-int totalDealer = 15;
-int num = 0;
-string message = "";
+// Declaración de variables e inicialización
+int totalJugador = 0, totalDealer = 15, num = 0, menuOpcion;
+string message = "", continuarCartas = "no";
 bool bucleMenu = true;
-int menuOpcion;
-string continuarCartas = "no";
 
 // Bucle while que se repite hasta que la variable sea igual a false
 while (bucleMenu == true)
