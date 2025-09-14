@@ -1,43 +1,83 @@
-﻿// Programa usando la condicional Switch
-// Correspondiente a la clase 14 y 15 de C#
+﻿// Programa usando la condicional IF, el menu Switch y el ciclo While
+// Correspondiente a la clase 14, 15 y 16 de C#
 
-const int totalDealer = 15; // Constante para dealer
+System.Random random = new System.Random();
+
+int totalJugador = 0;
+int totalDealer = 15;
+int num = 0;
 string message = "";
-string switchControl = "21";
-int totalJugador = 21;
+bool bucleMenu = true;
+int menuOpcion;
+string continuarCartas = "no";
 
-
-//Juntar 21 pidiendo cartas o en caso de tener menos de 21 tener igual
-
-switch (switchControl)
+// Bucle while que se repite hasta que la variable sea igual a false
+while (bucleMenu == true)
 {
-    case "menu":
-        Console.WriteLine("Welcome al c a s i n o");
-        Console.WriteLine("Escriba 21 para jugar al 21:");
-        switchControl = Console.ReadLine();
-        break;
+    // String que contiene las opciones del menu
+    String menu = """
+        Menú de juego:
+        1. Jugar
+        2. Salir
+        """;
+    Console.WriteLine(menu);
 
-    case "21":
-        if (totalJugador > totalDealer && totalJugador <= 21) // Si el jugador es mayor pero igual o menor a 21, gana
-        {
-            message = "Venciste al dealer, felicidades";
-        }
-        else if (totalJugador >= 22) // Si el jugador tiene de 22 o mas, pierde
-        {
-            message = "Perdiste ante el dealer, te pasaste de 21";
-        }
-        else if (totalJugador <= totalDealer) // Si el jugador tiene la misma cantidad o es menor, pierde
-        {
-            message = "Perdiste ante el dealer, lo siento";
-        }
-        else // En el mínimo caso de que el resultado no sea válido
-        {
-            message = "Condición no válida";
-        }
+    // Se puede ingresar 1 o 2 para entrar en los dos casos: jugar o salir
+    Console.Write("\nIngrese su opción: ");
+    menuOpcion = Convert.ToInt32(Console.ReadLine());
 
-        Console.WriteLine(message); // Se imprime el string del resultado
-        break;
-    default:
-        Console.WriteLine("Valor ingresado no válido");
-        break;
+    switch (menuOpcion) // Casos del switch
+    {
+        case 1: //Si se elige jugar
+            totalJugador = 0; // Se inializa cada vez en cero
+            do
+            {
+                num = random.Next(1, 12); // Numero random para cada lanzamiento
+                totalJugador = totalJugador + num;
+
+                Console.WriteLine("\nTomando tu carta...");
+                Console.WriteLine($"Te salio el número: {num}"); // Se muestra lo que salio
+                Console.WriteLine("Deseas otra carta?");
+                continuarCartas = Console.ReadLine();
+                // Dependiendo de si es "si", se continua sacando mas
+            } while (continuarCartas == "Si" || continuarCartas == "si");
+
+            // Muestra la cantidad del jugador
+            Console.WriteLine($"\nTu cantidad: {totalJugador}");
+
+
+            // Condicionales IF
+            // Reglapar ganar : Juntar mas de 15 cartas y menos de 22
+
+            // Si el jugador es mayor pero igual o menor a 21, gana
+            if (totalJugador > totalDealer && totalJugador <= 21) {
+                message = "Venciste al dealer, felicidades";
+            }
+            // Si el jugador tiene de 22 o mas, pierde
+            else if (totalJugador >= 22) {
+                message = "Perdiste ante el dealer, te pasaste de 21";
+            }
+            // Si el jugador tiene la misma cantidad o es menor, pierde
+            else if (totalJugador <= totalDealer) {
+                message = "Perdiste ante el dealer, lo siento";
+            }
+            // En el mínimo caso de que el resultado no sea válido
+            else {
+                message = "Condición no válida";
+            }
+
+            // Se imprime el string del resultado
+            Console.WriteLine(message);
+            Console.WriteLine();
+            Console.WriteLine();
+            break;
+
+        case 2: // Si se selecciona "Salir", se sale del bucle y del programa
+            bucleMenu = false;
+            break;
+
+        default: // Valor invalido
+            Console.WriteLine("Valor ingresado no válido");
+            break;
+    }
 }
